@@ -68,7 +68,7 @@
             return;
         }
 
-#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0 && !defined(SD_APP_EXTENSION)
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0 && !(defined(__has_feature) && __has_feature(attribute_availability_app_extension))
         if ([self shouldContinueWhenAppEntersBackground]) {
             __weak __typeof__ (self) wself = self;
             self.backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
@@ -118,7 +118,7 @@
         }
     }
 
-#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0 && !defined(SD_APP_EXTENSION)
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0 && !(defined(__has_feature) && __has_feature(attribute_availability_app_extension))
     if (self.backgroundTaskId != UIBackgroundTaskInvalid) {
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskId];
         self.backgroundTaskId = UIBackgroundTaskInvalid;

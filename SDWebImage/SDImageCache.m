@@ -467,7 +467,7 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
 }
 
 - (void)backgroundCleanDisk {
-#ifndef SD_APP_EXTENSION
+#if !(defined(__has_feature) && __has_feature(attribute_availability_app_extension))
     UIApplication *application = [UIApplication sharedApplication];
     __block UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
         // Clean up any unfinished task business by marking where you
